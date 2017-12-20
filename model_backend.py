@@ -31,7 +31,7 @@ while(1):
 
     print(toprocess['video'])
     urllib.urlretrieve (toprocess['video'], filename)
-    # os.system("./process.sh %s %s" % (filename, submission_id)) 
+    os.system("./process.sh %s %s" % (filename, submission_id)) 
 
     # analysis = None
     # analysis_file = "analysis/%s/analysis.json" % submission_id

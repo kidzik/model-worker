@@ -1,15 +1,10 @@
-ANALYSIS_DIR=analysis
-FRAMES_DIR=${ANALYSIS_DIR}/${2}/frames
-OUT_DIR=${ANALYSIS_DIR}/${2}/out
-PROCESSED_DIR=${ANALYSIS_DIR}/${2}/out-red
-mkdir ${ANALYSIS_DIR}/${2}
-mkdir ${FRAMES_DIR}
-mkdir ${OUT_DIR}
-mkdir ${PROCESSED_DIR}
-ffmpeg -i ${1} -qscale:v 5 ${FRAMES_DIR}/frame%6d.jpg
+rm ../knee_OA_staging/data/test_images/*
+cp ${1} ../knee_OA_staging/data/test_images/
+cd ../knee_OA_staging
 
-/home/lukasz/workspace/caffe_rtpose/build/examples/rtpose/rtpose.bin --image_dir ${FRAMES_DIR} --write_json ${OUT_DIR} --no_display --no_frame_drops
-cmd="/home/lukasz/anaconda2/bin/python process.py ${2}"
-echo $cmd
-eval $cmd
-ffmpeg -start_number 1 -framerate 30 -i ${PROCESSED_DIR}/frame%06d.jpg -vcodec libx264 -crf 25 -s 1024x720 downloads/${2}.mp4
+python tools/demo_all_predictions.py --cpu MLP
+
+#
+# cp knee_OA_staging/data/output_test_images/[FILE] ../model-worker/downloads/[ID]
+# SAVE THE LABEL SOMEHOW AND WRITE IT IN ../model-worker/analysis/[]
+# 

@@ -10,7 +10,7 @@ import localsettings as settings
 api_root = 'http://localhost:8000/api/'
 
 while(1):
-    r = requests.get(api_root + 'submissions/dequeue/', auth=HTTPBasicAuth('kidzik', settings.PASS))
+    r = requests.get(api_root + 'submissions/dequeue/knee/', auth=HTTPBasicAuth('admin', settings.PASS))
 #    print r.text
     if len(r.text) < 10:
         time.sleep(5)
@@ -51,6 +51,6 @@ while(1):
     m = MultipartEncoder(fields = fields)
 
     r = requests.patch(url, data=m,
-                    headers={'Content-Type': m.content_type}, auth=HTTPBasicAuth('kidzik', settings.PASS))
+                    headers={'Content-Type': m.content_type}, auth=HTTPBasicAuth('admin', settings.PASS))
     print(r)
     print(r.text)

@@ -26,6 +26,7 @@ while(1):
     #     continue
 
     filename = "uploads/" + os.path.basename(toprocess['video'])
+    filename_out = "downloads/" + os.path.basename(toprocess['video'])
     submission_id = toprocess['id']
     print(submission_id)
 
@@ -43,8 +44,8 @@ while(1):
     url = api_root + "submissions/%s/" % submission_id
 
     processed_video = None
-    if analysis:
-        processed_video = (submission_id + ".jpg", open(filename), 'image/jpeg')
+    if analysis and os.path.isfile(filename_out):
+        processed_video = (submission_id + ".jpg", open(filename_out), 'image/jpeg')
     fields = {
         'processed_video': processed_video,
         'analysis': analysis,
